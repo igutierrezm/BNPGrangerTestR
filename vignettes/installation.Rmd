@@ -14,13 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-You can install `BNPGrangerTest` from source as follows:
+You can install BNPGrangerTest from source as follows:
 
 ```{r, eval = FALSE}
 remotes::install_github("igutierrezm/ANOVABNPTestR")
 ```
 
-This will install the R package `BNPGrangerTest`, but not the Julia packages on
+This will install the R package BNPGrangerTest, but not the Julia packages on
 which it depends. In order to install these Julia packages, run
 
 ```{r, eval = FALSE}
@@ -31,7 +31,7 @@ You only need to do this once.
 
 ## Dependencies
 
-`BNPGrangerTest` requires Julia v1.9.1+. You can download it 
+BNPGrangerTest requires Julia v1.9.1+. You can download it 
 [here](https://julialang.org/downloads/), 
 and then install it following these 
 [instructions](https://julialang.org/downloads/platform/).
