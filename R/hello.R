@@ -52,7 +52,8 @@ bnpgrangertest <- function(
   out <-
     list(
       gamma = out_jl$gamma |> dplyr::as_tibble(),
-      irf = out_jl$irf |> dplyr::as_tibble()
+      irf = out_jl$irf |> dplyr::as_tibble(),
+      pdf = out_jl$pdf |> dplyr::as_tibble()
     ) |>
     magrittr::set_class("bnpgrangertest")
   return(out)
