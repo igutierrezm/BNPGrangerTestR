@@ -87,9 +87,9 @@ bnpgrangertest <- function(
 #' @return A tibble with the posterior probability of each hypothesis
 #' (one per row), and the following variables:
 #' \itemize{
-#'   \item cause_id: the causing variable in the relationship.
-#'   \item effect_id: the affected variable in the relationship.
-#'   \item prob: The posterior probability of the causal relationship.
+#'   \item `cause_id`: the causing variable in the relationship.
+#'   \item `effect_id`: the affected variable in the relationship.
+#'   \item `prob`: The posterior probability of the causal relationship.
 #' }
 #' @importFrom rlang := .data
 #' @export
@@ -109,10 +109,10 @@ summarize_gamma <- function(object) {
 #' @return A tibble with the posterior mean of each requested IRF,
 #' and the following variables:
 #' \itemize{
-#'   \item horizon: the IRF horizon.
-#'   \item cause_id: the causing variable in the relationship.
-#'   \item effect_id: the affected variable in the relationship.
-#'   \item irf: The posterior mean of the IRF.
+#'   \item `horizon`: the IRF horizon.
+#'   \item `cause_id`: the causing variable in the relationship.
+#'   \item `effect_id`: the affected variable in the relationship.
+#'   \item `irf`: The posterior mean of the IRF.
 #' }
 #' @importFrom rlang := .data
 #' @export
@@ -132,11 +132,11 @@ summarize_irf <- function(object) {
 #' @return A tibble with each posterior predictive pdf,
 #' and the following variables:
 #' \itemize{
-#'   \item horizon: the IRF horizon.
-#'   \item cause_id: the causing variable in the relationship.
-#'   \item effect_id: the affected variable in the relationship.
-#'   \item y: the grid point.
-#'   \item pdf: The posterior predictive pdf.
+#'   \item `horizon`: the IRF horizon.
+#'   \item `cause_id`: the causing variable in the relationship.
+#'   \item `effect_id`: the affected variable in the relationship.
+#'   \item `y`: the grid point.
+#'   \item `pdf`: The posterior predictive pdf.
 #' }
 #' @importFrom rlang := .data
 #' @export

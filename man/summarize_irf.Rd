@@ -13,10 +13,10 @@ summarize_irf(object)
 A tibble with the posterior mean of each requested IRF,
 and the following variables:
 \itemize{
-  \item horizon: the IRF horizon.
-  \item cause_id: the causing variable in the relationship.
-  \item effect_id: the affected variable in the relationship.
-  \item irf: The posterior mean of the IRF.
+  \item `horizon`: the IRF horizon.
+  \item `cause_id`: the causing variable in the relationship.
+  \item `effect_id`: the affected variable in the relationship.
+  \item `irf`: The posterior mean of the IRF.
 }
 }
 \description{

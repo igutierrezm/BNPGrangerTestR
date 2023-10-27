@@ -13,9 +13,9 @@ summarize_gamma(object)
 A tibble with the posterior probability of each hypothesis
 (one per row), and the following variables:
 \itemize{
-  \item cause_id: the causing variable in the relationship.
-  \item effect_id: the affected variable in the relationship.
-  \item prob: The posterior probability of the causal relationship.
+  \item `cause_id`: the causing variable in the relationship.
+  \item `effect_id`: the affected variable in the relationship.
+  \item `prob`: The posterior probability of the causal relationship.
 }
 }
 \description{

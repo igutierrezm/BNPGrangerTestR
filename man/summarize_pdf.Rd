@@ -13,11 +13,11 @@ summarize_pdf(object)
 A tibble with each posterior predictive pdf,
 and the following variables:
 \itemize{
-  \item horizon: the IRF horizon.
-  \item cause_id: the causing variable in the relationship.
-  \item effect_id: the affected variable in the relationship.
-  \item y: the grid point.
-  \item pdf: The posterior predictive pdf.
+  \item `horizon`: the IRF horizon.
+  \item `cause_id`: the causing variable in the relationship.
+  \item `effect_id`: the affected variable in the relationship.
+  \item `y`: the grid point.
+  \item `pdf`: The posterior predictive pdf.
 }
 }
 \description{
