@@ -13,3 +13,4 @@ Imports:
     dplyr,
     JuliaConnectoR,
     magrittr
+RoxygenNote: 7.2.3

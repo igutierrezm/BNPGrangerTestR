@@ -6,10 +6,10 @@
 #' @param q0 the hyperparameter \eqn{q_{0} := \sigma_{0}^{2}} (default 1.0).
 #' @param v0 the hyperparameter \eqn{v_{0}} (default 1.0).
 #' @param S0 the hyperparameter \eqn{S_{0}} (default \eqn{I_{N}}).
-#' @param a0p the hyperparameter \eqn{a_{0p} (default 1.0).
-#' @param b0p the hyperparameter \eqn{b_{0p} (default 1.0).
-#' @param a0s the hyperparameter \eqn{a_{0s} (default 8.0).
-#' @param b0s the hyperparameter \eqn{b_{0s} (default 4.0).
+#' @param a0p the hyperparameter \eqn{a_{0p}} (default 1.0).
+#' @param b0p the hyperparameter \eqn{b_{0p}} (default 1.0).
+#' @param a0s the hyperparameter \eqn{a_{0s}} (default 8.0).
+#' @param b0s the hyperparameter \eqn{b_{0s}} (default 4.0).
 #' @param iter the total number of mcmc iterations (default 4000L).
 #' @param warmup the number of warmup mcmc iterations (default 2000L).
 #' @param seed the seed for random number generation (default 1L).
@@ -22,6 +22,10 @@
 #' @param grid_lb a vector of lower bounds, see `grid_npoints`.
 #' @param grid_ub a vector of upper bounds, see `grid_npoints`.
 #' @return An object of class 'bnpgrangertest'.
+#' @seealso
+#' [summarize_gamma()] for a summary of the \eqn{\gamma}'s,
+#' [summarize_pdf()] for a summary of the posterior predictive pdf's.
+#' [summarize_irf()] for a summary of the IRFs.
 #' @export
 bnpgrangertest <- function(
     Y,
@@ -77,31 +81,67 @@ bnpgrangertest <- function(
   return(out)
 }
 
-summarize_gamma <- function(x) {
+#' Summarize the posterior distribution of the hypothesis vector.
+#'
+#' @param fit An object of class `bnpgrangertest`.
+#' @return A tibble with the posterior probability of each hypothesis
+#' (one per row), and the following variables:
+#' \itemize{
+#'   \item cause_id: the causing variable in the relationship.
+#'   \item effect_id: the affected variable in the relationship.
+#'   \item prob: The posterior probability of the causal relationship.
+#' }
+#' @export
+summarize_gamma <- function(fit) {
   out <-
-    x$gamma |>
+    fit$gamma |>
     dplyr::summarise(
-      mean = mean(value),
+      prob = mean(value),
       .by = c(cause_id, effect_id)
     )
   return(out)
 }
 
+#' Summarize the posterior distribution of the IRF.
+#'
+#' @param fit An object of class `bnpgrangertest`.
+#' @return A tibble with the posterior mean of each requested IRF,
+#' and the following variables:
+#' \itemize{
+#'   \item horizon: the IRF horizon.
+#'   \item cause_id: the causing variable in the relationship.
+#'   \item effect_id: the affected variable in the relationship.
+#'   \item irf: The posterior mean of the IRF.
+#' }
+#' @export
 summarize_irf <- function(x) {
   out <-
     x$irf |>
     dplyr::summarise(
-      mean = mean(value),
+      irf = mean(value),
       .by = c(horizon, cause_id, effect_id)
     )
   return(out)
 }
 
+#' Summarize the posterior predictive distribution.
+#'
+#' @param fit An object of class `bnpgrangertest`.
+#' @return A tibble with each posterior predictive pdf,
+#' and the following variables:
+#' \itemize{
+#'   \item horizon: the IRF horizon.
+#'   \item cause_id: the causing variable in the relationship.
+#'   \item effect_id: the affected variable in the relationship.
+#'   \item y: the grid point.
+#'   \item pdf: The posterior predictive pdf.
+#' }
+#' @export
 summarize_pdf <- function(x) {
   out <-
     x$pdf |>
     dplyr::summarise(
-      mean = mean(value),
+      pdf = mean(value),
       .by = c(horizon, var_id, y)
     )
   return(out)
