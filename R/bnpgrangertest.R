@@ -58,3 +58,15 @@ bnpgrangertest <- function(
     magrittr::set_class("bnpgrangertest")
   return(out)
 }
+
+extract_chain_gamma <- function(x) {
+  return(x$gamma)
+}
+
+extract_chain_irf <- function(x) {
+  return(x$irf)
+}
+
+extract_chain_pdf <- function(x) {
+  return(x$pdf)
+}
