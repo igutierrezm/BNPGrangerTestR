@@ -4,10 +4,10 @@
 \alias{summarize_pdf}
 \title{Summarize the posterior predictive distribution.}
 \usage{
-summarize_pdf(x)
+summarize_pdf(object)
 }
 \arguments{
-\item{fit}{An object of class `bnpgrangertest`.}
+\item{object}{An instance of class `bnpgrangertest`.}
 }
 \value{
 A tibble with each posterior predictive pdf,

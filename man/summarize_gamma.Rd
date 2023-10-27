@@ -2,12 +2,12 @@
 % Please edit documentation in R/bnpgrangertest.R
 \name{summarize_gamma}
 \alias{summarize_gamma}
-\title{Summarize the posterior distribution of the hypothesis vector.}
+\title{Summarize the posterior distribution of gamma.}
 \usage{
-summarize_gamma(fit)
+summarize_gamma(object)
 }
 \arguments{
-\item{fit}{An object of class `bnpgrangertest`.}
+\item{object}{An instance of class `bnpgrangertest`.}
 }
 \value{
 A tibble with the posterior probability of each hypothesis
@@ -19,5 +19,5 @@ A tibble with the posterior probability of each hypothesis
 }
 }
 \description{
-Summarize the posterior distribution of the hypothesis vector.
+Summarize the posterior distribution of gamma.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bnpgrangertest.R
 \name{bnpgrangertest}
 \alias{bnpgrangertest}
-\title{Perform the Granger causality test described in Gutiérrez et al. (2023)}
+\title{Perform the Granger causality test described in Gutiérrez et al. (2023).}
 \usage{
 bnpgrangertest(
   Y,
@@ -22,8 +22,7 @@ bnpgrangertest(
   seed = 1L,
   grid_npoints = 50L,
   grid_lbs = apply(Y, 2, min),
-  grid_ubs = apply(Y, 2, max),
-  ...
+  grid_ubs = apply(Y, 2, max)
 )
 }
 \arguments{
@@ -31,45 +30,47 @@ bnpgrangertest(
 
 \item{p}{The number of lags in the model (defaul = 1L).}
 
-\item{z0}{the hyperparameter \eqn{\zeta_{0}} (default 1.0).}
+\item{z0}{The hyperparameter \eqn{\zeta_{0}} (default 1.0).}
 
-\item{q0}{the hyperparameter \eqn{q_{0} := \sigma_{0}^{2}} (default 1.0).}
+\item{q0}{The hyperparameter \eqn{q_{0} := \sigma_{0}^{2}} (default 1.0).}
 
-\item{a0p}{the hyperparameter \eqn{a_{0p}} (default 1.0).}
+\item{a0p}{The hyperparameter \eqn{a_{0p}} (default 1.0).}
 
-\item{b0p}{the hyperparameter \eqn{b_{0p}} (default 1.0).}
+\item{b0p}{The hyperparameter \eqn{b_{0p}} (default 1.0).}
 
-\item{a0s}{the hyperparameter \eqn{a_{0s}} (default 8.0).}
+\item{a0s}{The hyperparameter \eqn{a_{0s}} (default 8.0).}
 
-\item{b0s}{the hyperparameter \eqn{b_{0s}} (default 4.0).}
+\item{b0s}{The hyperparameter \eqn{b_{0s}} (default 4.0).}
 
-\item{v0}{the hyperparameter \eqn{v_{0}} (default 1.0).}
+\item{v0}{The hyperparameter \eqn{v_{0}} (default 1.0).}
 
-\item{S0}{the hyperparameter \eqn{S_{0}} (default \eqn{I_{N}}).}
+\item{S0}{The hyperparameter \eqn{S_{0}} (default \eqn{I_{N}}).}
 
-\item{warmup}{the number of warmup mcmc iterations (default 2000L).}
+\item{warmup}{The number of warmup mcmc iterations (default 2000L).}
 
-\item{iter}{the total number of mcmc iterations (default 4000L).}
+\item{iter}{The total number of mcmc iterations (default 4000L).}
 
-\item{hmax}{the maximum horizon for computing
+\item{thin}{The period for saving samples (default 1L).}
+
+\item{hmax}{The maximum horizon for computing
 both the irfs and the posterior predictive pdfs.}
 
-\item{seed}{the seed for random number generation (default 1L).}
+\item{seed}{The seed for random number generation (default 1L).}
 
-\item{grid_npoints}{the number of points y0 for computing each posterior
+\item{grid_npoints}{The number of points y0 for computing each posterior
 predictive pdf. The final grid for the ith variable is conformed by
 `grid_npoints` equispaced points from `grid_lb[i]` to `grid_ub[i]`,
 see the arguments `grid_lb` and `grid_ub`.}
 
-\item{grid_lb}{a vector of lower bounds, see `grid_npoints`.}
+\item{grid_lbs}{A vector of lower bounds, see `grid_npoints`.}
 
-\item{grid_ub}{a vector of upper bounds, see `grid_npoints`.}
+\item{grid_ubs}{A vector of upper bounds, see `grid_npoints`.}
 }
 \value{
 An object of class 'bnpgrangertest'.
 }
 \description{
-Perform the Granger causality test described in Gutiérrez et al. (2023)
+Perform the Granger causality test described in Gutiérrez et al. (2023).
 }
 \seealso{
 [summarize_gamma()] for a summary of the \eqn{\gamma}'s,

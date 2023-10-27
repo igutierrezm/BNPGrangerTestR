@@ -1,16 +1,23 @@
 Package: BNPGrangerTestR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A Bayesian Nonparametric Granger Causality Test
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R:
+  utils::person(
+    given   = "Iván",
+    family  = "Gutiérrez",
+    role    = c("aut", "cre"),
+    email   = "isgutierrez@mat.uc.cl",
+    comment = c(ORCID = "0000-0001-6523-7154")
+  )
+Description: A BNP Granger causaility test based on a 
+    Dependent Geometric Stick breaking process.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
     dplyr,
     JuliaConnectoR,
-    magrittr
+    magrittr,
+    rlang
 RoxygenNote: 7.2.3

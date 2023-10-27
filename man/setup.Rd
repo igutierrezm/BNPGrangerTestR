@@ -2,7 +2,7 @@
 % Please edit documentation in R/bnpgrangertest.R
 \name{setup}
 \alias{setup}
-\title{Check Julia setup}
+\title{Check Julia setup.}
 \usage{
 setup()
 }

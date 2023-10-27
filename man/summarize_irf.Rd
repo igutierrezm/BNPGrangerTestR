@@ -4,10 +4,10 @@
 \alias{summarize_irf}
 \title{Summarize the posterior distribution of the IRF.}
 \usage{
-summarize_irf(x)
+summarize_irf(object)
 }
 \arguments{
-\item{fit}{An object of class `bnpgrangertest`.}
+\item{object}{An instance of class `bnpgrangertest`.}
 }
 \value{
 A tibble with the posterior mean of each requested IRF,

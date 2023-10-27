@@ -1,26 +1,27 @@
-#' Perform the Granger causality test described in Gutiérrez et al. (2023)
+#' Perform the Granger causality test described in Gutiérrez et al. (2023).
 #'
 #' @param Y A \eqn{T \times N} response matrix with \eqn{T} periods.
 #' @param p The number of lags in the model (defaul = 1L).
-#' @param z0 the hyperparameter \eqn{\zeta_{0}} (default 1.0).
-#' @param q0 the hyperparameter \eqn{q_{0} := \sigma_{0}^{2}} (default 1.0).
-#' @param v0 the hyperparameter \eqn{v_{0}} (default 1.0).
-#' @param S0 the hyperparameter \eqn{S_{0}} (default \eqn{I_{N}}).
-#' @param a0p the hyperparameter \eqn{a_{0p}} (default 1.0).
-#' @param b0p the hyperparameter \eqn{b_{0p}} (default 1.0).
-#' @param a0s the hyperparameter \eqn{a_{0s}} (default 8.0).
-#' @param b0s the hyperparameter \eqn{b_{0s}} (default 4.0).
-#' @param iter the total number of mcmc iterations (default 4000L).
-#' @param warmup the number of warmup mcmc iterations (default 2000L).
-#' @param seed the seed for random number generation (default 1L).
-#' @param hmax the maximum horizon for computing
+#' @param z0 The hyperparameter \eqn{\zeta_{0}} (default 1.0).
+#' @param q0 The hyperparameter \eqn{q_{0} := \sigma_{0}^{2}} (default 1.0).
+#' @param v0 The hyperparameter \eqn{v_{0}} (default 1.0).
+#' @param S0 The hyperparameter \eqn{S_{0}} (default \eqn{I_{N}}).
+#' @param a0p The hyperparameter \eqn{a_{0p}} (default 1.0).
+#' @param b0p The hyperparameter \eqn{b_{0p}} (default 1.0).
+#' @param a0s The hyperparameter \eqn{a_{0s}} (default 8.0).
+#' @param b0s The hyperparameter \eqn{b_{0s}} (default 4.0).
+#' @param thin The period for saving samples (default 1L).
+#' @param iter The total number of mcmc iterations (default 4000L).
+#' @param warmup The number of warmup mcmc iterations (default 2000L).
+#' @param seed The seed for random number generation (default 1L).
+#' @param hmax The maximum horizon for computing
 #' both the irfs and the posterior predictive pdfs.
-#' @param grid_npoints the number of points y0 for computing each posterior
+#' @param grid_npoints The number of points y0 for computing each posterior
 #' predictive pdf. The final grid for the ith variable is conformed by
 #' `grid_npoints` equispaced points from `grid_lb[i]` to `grid_ub[i]`,
 #' see the arguments `grid_lb` and `grid_ub`.
-#' @param grid_lb a vector of lower bounds, see `grid_npoints`.
-#' @param grid_ub a vector of upper bounds, see `grid_npoints`.
+#' @param grid_lbs A vector of lower bounds, see `grid_npoints`.
+#' @param grid_ubs A vector of upper bounds, see `grid_npoints`.
 #' @return An object of class 'bnpgrangertest'.
 #' @seealso
 #' [summarize_gamma()] for a summary of the \eqn{\gamma}'s,
@@ -45,8 +46,7 @@ bnpgrangertest <- function(
     seed = 1L,
     grid_npoints = 50L,
     grid_lbs = apply(Y, 2, min),
-    grid_ubs = apply(Y, 2, max),
-    ...
+    grid_ubs = apply(Y, 2, max)
 ) {
   BV <- JuliaConnectoR::juliaImport("BNPVAR")
   RD <- JuliaConnectoR::juliaImport("Random")
@@ -81,9 +81,9 @@ bnpgrangertest <- function(
   return(out)
 }
 
-#' Summarize the posterior distribution of the hypothesis vector.
+#' Summarize the posterior distribution of gamma.
 #'
-#' @param fit An object of class `bnpgrangertest`.
+#' @param object An instance of class `bnpgrangertest`.
 #' @return A tibble with the posterior probability of each hypothesis
 #' (one per row), and the following variables:
 #' \itemize{
@@ -91,20 +91,21 @@ bnpgrangertest <- function(
 #'   \item effect_id: the affected variable in the relationship.
 #'   \item prob: The posterior probability of the causal relationship.
 #' }
+#' @importFrom rlang := .data
 #' @export
-summarize_gamma <- function(fit) {
+summarize_gamma <- function(object) {
   out <-
-    fit$gamma |>
+    object$gamma |>
     dplyr::summarise(
-      prob = mean(value),
-      .by = c(cause_id, effect_id)
+      prob = mean(.data[["value"]]),
+      .by = c("cause_id", "effect_id") |> dplyr::any_of()
     )
   return(out)
 }
 
 #' Summarize the posterior distribution of the IRF.
 #'
-#' @param fit An object of class `bnpgrangertest`.
+#' @param object An instance of class `bnpgrangertest`.
 #' @return A tibble with the posterior mean of each requested IRF,
 #' and the following variables:
 #' \itemize{
@@ -113,20 +114,21 @@ summarize_gamma <- function(fit) {
 #'   \item effect_id: the affected variable in the relationship.
 #'   \item irf: The posterior mean of the IRF.
 #' }
+#' @importFrom rlang := .data
 #' @export
-summarize_irf <- function(x) {
+summarize_irf <- function(object) {
   out <-
-    x$irf |>
+    object$irf |>
     dplyr::summarise(
-      irf = mean(value),
-      .by = c(horizon, cause_id, effect_id)
+      irf = mean(.data[["value"]]),
+      .by = c("horizon", "cause_id", "effect_id") |> dplyr::any_of()
     )
   return(out)
 }
 
 #' Summarize the posterior predictive distribution.
 #'
-#' @param fit An object of class `bnpgrangertest`.
+#' @param object An instance of class `bnpgrangertest`.
 #' @return A tibble with each posterior predictive pdf,
 #' and the following variables:
 #' \itemize{
@@ -136,13 +138,14 @@ summarize_irf <- function(x) {
 #'   \item y: the grid point.
 #'   \item pdf: The posterior predictive pdf.
 #' }
+#' @importFrom rlang := .data
 #' @export
-summarize_pdf <- function(x) {
+summarize_pdf <- function(object) {
   out <-
-    x$pdf |>
+    object$pdf |>
     dplyr::summarise(
-      pdf = mean(value),
-      .by = c(horizon, var_id, y)
+      pdf = mean(.data[["value"]]),
+      .by = c("horizon", "var_id", "y") |> dplyr::any_of()
     )
   return(out)
 }
@@ -159,7 +162,7 @@ extract_chain_pdf <- function(x) {
   return(x$pdf)
 }
 
-#' Check Julia setup
+#' Check Julia setup.
 #'
 #' Check that Julia (v1.0.0+) can be started and install  ANOVADDPTest.jl.
 #' For more information about the setup and discovery of Julia, see
