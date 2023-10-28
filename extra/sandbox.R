@@ -1,4 +1,4 @@
-# setup()
+setup()
 library(BNPGrangerTestR)
 library(devtools)
 library(pkgdown)

@@ -383,7 +383,7 @@ extract_tbl_var <- function(object) {
 setup <- function() {
   message("Checking that Julia (version >= 1.0) can be started...")
   if (!JuliaConnectoR::juliaSetupOk()) stop("Julia could not be started.")
-  c("AbstractGSBPs.jl", "BayesVAR.jl", "BNPVAR.jl") |>
+  c("AbstractGSBPs.jl", "BNPVAR.jl") |>
     lapply(function(x) {
       paste("Installing", x, "...") |> message()
       code <-
