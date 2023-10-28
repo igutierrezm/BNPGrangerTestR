@@ -2,22 +2,22 @@
 % Please edit documentation in R/bnpgrangertest.R
 \name{summarize_gamma}
 \alias{summarize_gamma}
-\title{Summarize the posterior distribution of gamma.}
+\title{Summarize the posterior distribution of \eqn{\gamma}.}
 \usage{
 summarize_gamma(object)
 }
 \arguments{
-\item{object}{An instance of class `bnpgrangertest`.}
+\item{object}{An instance of class \code{bnpgrangertest}.}
 }
 \value{
-A tibble with the posterior probability of each hypothesis
-(one per row), and the following variables:
+A tibble with the posterior probability of \eqn{\gamma},
+and the following variables:
 \itemize{
-  \item `cause_id`: the causing variable in the relationship.
-  \item `effect_id`: the affected variable in the relationship.
-  \item `prob`: The posterior probability of the causal relationship.
+  \item \code{cause_var}: the causing variable in the relationship.
+  \item \code{effect_var}: the affected variable in the relationship.
+  \item \code{prob}: The posterior probability of the causal relationship.
 }
 }
 \description{
-Summarize the posterior distribution of gamma.
+Summarize the posterior distribution of \eqn{\gamma}.
 }

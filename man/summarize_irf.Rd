@@ -2,23 +2,27 @@
 % Please edit documentation in R/bnpgrangertest.R
 \name{summarize_irf}
 \alias{summarize_irf}
-\title{Summarize the posterior distribution of the IRF.}
+\title{Summarize the posterior distribution of the IRFs.}
 \usage{
-summarize_irf(object)
+summarize_irf(object, qlb = 0.1, qub = 0.9)
 }
 \arguments{
-\item{object}{An instance of class `bnpgrangertest`.}
+\item{object}{An instance of class \code{bnpgrangertest}.}
+
+\item{qlb}{The quantile used for computing the lower bound of the CI.}
+
+\item{qub}{The quantile used for computing the lower bound of the CI.}
 }
 \value{
 A tibble with the posterior mean of each requested IRF,
 and the following variables:
 \itemize{
-  \item `horizon`: the IRF horizon.
+  \item \code{horizon}: the IRF horizon.
   \item `cause_id`: the causing variable in the relationship.
   \item `effect_id`: the affected variable in the relationship.
   \item `irf`: The posterior mean of the IRF.
 }
 }
 \description{
-Summarize the posterior distribution of the IRF.
+Summarize the posterior distribution of the IRFs.
 }

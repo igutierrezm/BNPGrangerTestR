@@ -1,9 +1,18 @@
-setup()
+# setup()
+library(BNPGrangerTestR)
+library(devtools)
+library(pkgdown)
 
-{
-  Nvar <- 3
-  Nobs <- 100
-  Y <- rnorm(Nobs * Nvar) |> matrix(ncol = Nvar)
-  out <- bnpgrangertest(Y, iter = 11L, warmup = 1L)
-  summarize_gamma(out)
-}
+object <-
+  example_dataset |>
+  bnpgrangertest(
+    iter = 10L,
+    warmup = 5L,
+    grid_npoints = 50L,
+    hmax = 3L
+  )
+
+object |>
+  plot_irf()
+
+document(); build_site()

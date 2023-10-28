@@ -21,59 +21,54 @@ bnpgrangertest(
   hmax = 1L,
   seed = 1L,
   grid_npoints = 50L,
-  grid_lbs = apply(Y, 2, min),
-  grid_ubs = apply(Y, 2, max)
+  grid_lbs = apply(Y, 2, function(x) mean(x) - 3 * stats::sd(x)),
+  grid_ubs = apply(Y, 2, function(x) mean(x) + 3 * stats::sd(x))
 )
 }
 \arguments{
 \item{Y}{A \eqn{T \times N} response matrix with \eqn{T} periods.}
 
-\item{p}{The number of lags in the model (defaul = 1L).}
+\item{p}{The number of lags in the model.}
 
-\item{z0}{The hyperparameter \eqn{\zeta_{0}} (default 1.0).}
+\item{z0}{The hyperparameter \eqn{\zeta_{0}}.}
 
-\item{q0}{The hyperparameter \eqn{q_{0} := \sigma_{0}^{2}} (default 1.0).}
+\item{q0}{The hyperparameter \eqn{q_{0} := \sigma_{0}^{2}}.}
 
-\item{a0p}{The hyperparameter \eqn{a_{0p}} (default 1.0).}
+\item{a0p}{The hyperparameter \eqn{a_{0p}}.}
 
-\item{b0p}{The hyperparameter \eqn{b_{0p}} (default 1.0).}
+\item{b0p}{The hyperparameter \eqn{b_{0p}}.}
 
-\item{a0s}{The hyperparameter \eqn{a_{0s}} (default 8.0).}
+\item{a0s}{The hyperparameter \eqn{a_{0s}}.}
 
-\item{b0s}{The hyperparameter \eqn{b_{0s}} (default 4.0).}
+\item{b0s}{The hyperparameter \eqn{b_{0s}}.}
 
-\item{v0}{The hyperparameter \eqn{v_{0}} (default 1.0).}
+\item{v0}{The hyperparameter \eqn{v_{0}}.}
 
-\item{S0}{The hyperparameter \eqn{S_{0}} (default \eqn{I_{N}}).}
+\item{S0}{The hyperparameter \eqn{S_{0}}.}
 
-\item{warmup}{The number of warmup mcmc iterations (default 2000L).}
+\item{warmup}{The number of warmup mcmc iterations.}
 
-\item{iter}{The total number of mcmc iterations (default 4000L).}
+\item{iter}{The total number of mcmc iterations.}
 
-\item{thin}{The period for saving samples (default 1L).}
+\item{thin}{The period for saving samples.}
 
 \item{hmax}{The maximum horizon for computing
-both the irfs and the posterior predictive pdfs.}
+both the IRFs and the posterior predictive pdfs.}
 
-\item{seed}{The seed for random number generation (default 1L).}
+\item{seed}{The seed for random number generation.}
 
 \item{grid_npoints}{The number of points y0 for computing each posterior
 predictive pdf. The final grid for the ith variable is conformed by
-`grid_npoints` equispaced points from `grid_lb[i]` to `grid_ub[i]`,
-see the arguments `grid_lb` and `grid_ub`.}
+`grid_npoints` equispaced points from \code{grid_lbs[i]} to
+\code{grid_ubs[i]},  see the arguments \code{grid_lb} and \code{grid_ub}.}
 
-\item{grid_lbs}{A vector of lower bounds, see `grid_npoints`.}
+\item{grid_lbs}{A vector of lower bounds, see \code{grid_npoints}.}
 
-\item{grid_ubs}{A vector of upper bounds, see `grid_npoints`.}
+\item{grid_ubs}{A vector of upper bounds, see \code{grid_npoints}.}
 }
 \value{
-An object of class 'bnpgrangertest'.
+An object of class \code{bnpgrangertest}.
 }
 \description{
 Perform the Granger causality test described in Gutiérrez et al. (2023).
-}
-\seealso{
-[summarize_gamma()] for a summary of the \eqn{\gamma}'s,
-[summarize_pdf()] for a summary of the posterior predictive pdf's.
-[summarize_irf()] for a summary of the IRFs.
 }

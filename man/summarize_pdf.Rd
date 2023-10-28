@@ -7,17 +7,17 @@
 summarize_pdf(object)
 }
 \arguments{
-\item{object}{An instance of class `bnpgrangertest`.}
+\item{object}{An instance of class \code{bnpgrangertest}.}
 }
 \value{
 A tibble with each posterior predictive pdf,
 and the following variables:
 \itemize{
-  \item `horizon`: the IRF horizon.
-  \item `cause_id`: the causing variable in the relationship.
-  \item `effect_id`: the affected variable in the relationship.
-  \item `y`: the grid point.
-  \item `pdf`: The posterior predictive pdf.
+  \item \code{horizon}: the IRF horizon.
+  \item \code{cause_var}: the causing variable in the relationship.
+  \item \code{effect_var}: the affected variable in the relationship.
+  \item \code{y}: the grid point.
+  \item \code{pdf}: The posterior predictive pdf.
 }
 }
 \description{

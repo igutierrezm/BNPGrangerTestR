@@ -17,9 +17,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     dplyr,
+    ggplot2,
     JuliaConnectoR,
     magrittr,
-    rlang
+    rlang,
+    stats
 RoxygenNote: 7.2.3
 Suggests: 
     knitr,

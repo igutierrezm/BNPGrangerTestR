@@ -3,14 +3,15 @@
 \docType{data}
 \name{example_dataset}
 \alias{example_dataset}
-\title{A simulated dataset for illustration purposes}
+\title{A simulated dataset for illustration purposes.}
 \format{
-A matrix with 100 rows and 2 columns.
+A matrix with 200 rows and 2 columns where the 1st variable Granger causes
+the 2nd variable, but not the other way around.
 }
 \usage{
 example_dataset
 }
 \description{
-A simulated dataset for illustration purposes
+A simulated dataset for illustration purposes.
 }
 \keyword{datasets}
