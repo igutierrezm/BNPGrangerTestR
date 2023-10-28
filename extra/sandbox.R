@@ -13,6 +13,7 @@ object <-
   )
 
 object |>
-  plot_irf()
+  summarize_pdf() |>
+  head()
 
 document(); build_site()

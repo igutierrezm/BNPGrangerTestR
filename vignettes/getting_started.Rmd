@@ -2,7 +2,7 @@
 title: "Getting Started"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{getting_started}
+  %\VignetteIndexEntry{Getting Started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,6 +14,86 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, eval = FALSE}
 library(BNPGrangerTestR)
+```
+
+To explore the basic capabilities of `BNPGrangerTestR`, we'll use the dataset 
+`example_dataset`. This is a simulated sample with 200 registers and 2 
+continuous responses.
+
+`BNPGrangerTestR` aims to provide tools for testing the existence of a 
+Granger causal relationship between any pair of variables, 
+using a flexible Bayesian model.
+
+### Fitting the model
+
+First, we need to train the model:
+```{r, message = FALSE, eval = FALSE}
+object <-
+  example_dataset |>
+  bnpgrangertest()
+```
+
+### Testing for Granger causal relationships
+
+Once the model is trained, we can compute the posterior probability of 
+each Granger causal relationship as follows:
+
+```{r, eval = FALSE}
+summarize_gamma(object)
+```
+
+In this row of this tibble, `cause_var` is the causing variable, `effect_var`
+is the affected variable, and `prob` is the posterior probability of `cause_var` 
+causing `effect_var`. In this case, there is strong evidence of a `y1` 
+(the 1st variable) Granger-causing `y2` (the 2nd variable), 
+but not the other way around.
+
+### Computing the IRF
+
+In a similar, we can summarize the posterior distribution 
+of the IRFs as follows:
+
+```{r, eval = FALSE}
+summarize_irf(object)
+```
+
+In each row of this tibble, `horizon` is the IRF horizon, `cause_var` and
+`effect_var` are defined as before, `irf` is the posterior mean of the IRF,
+and `lb` and `ub` represent the 90% credible interval of the IRF.
+
+### Computing the posterior predictive pdf
+
+Finally, we can summarize all (1 dimensional) posterior 
+predictive pdfs as follows:
+
+```{r, eval = FALSE}
+summarize_pdf(object)
+```
+
+In each row of this tibble, `horizon` is the prediction horizon, `var` is the
+target variable, `y` is the point for which the pdf is evaluated, and `pdf`
+is the value of the posterior predictive pdf at `y`.
+
+### Plotting capabilities
+
+Instead of summarizying the results as a `tibble`, you can summarize them 
+as a `ggplot` using the following functions:
+
+```{r, eval = FALSE}
+plot_gamma(object)
+plot_irf(object)
+plot_pdf(object)
+```
+
+### Extracting the MCMC chains
+
+Finally, you can extract the raw chains of the main variables of our model
+using the following functions:
+
+```{r, eval = FALSE}
+extract_chain_gamma(object)
+extract_chain_irf(object)
+extract_chain_pdf(object)
 ```
